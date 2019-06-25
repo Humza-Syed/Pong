@@ -15,26 +15,32 @@ public class Sprite {
 	private double width;
 	private double height;
 
-	public Sprite(Image image,double x,double y){
+	Sprite(Image image,double x,double y){
 		this.image = image;
 		this.posX = x;
 		this.posY = y;
+		this.width = image.getWidth();
+		this.height = image.getHeight();
 	}
 
-	public void update(double time){
+	// Updates the sprites location based on velocity and time.
+	void update(double time){
 		this.posX += velX * time;
 		this.posY += velY * time;
 	}
 
-	public void render(GraphicsContext gc){
+	// Draws the sprite using current co-ordinates.
+	void render(GraphicsContext gc){
 		gc.drawImage(image,posX,posY);
 	}
 
-	public Rectangle2D getBoundary(){
+	// Returns rectangular boundary of sprite used for collision detection.
+	private Rectangle2D getBoundary(){
 		return new Rectangle2D(posX,posY,width,height);
 	}
 
-	public boolean intersects(Sprite s){
+	// Checks for the intersection of sprite objects.
+	boolean intersects(Sprite s){
 		return s.getBoundary().intersects(this.getBoundary());
 	}
 
@@ -43,19 +49,19 @@ public class Sprite {
 		this.velY += y;
 	}
 
-	public double getPosX() {
+	double getPosX() {
 		return posX;
 	}
 
-	public double getPosY() {
+	double getPosY() {
 		return posY;
 	}
 
-	public double getVelX() {
+	double getVelX() {
 		return velX;
 	}
 
-	public double getVelY() {
+	double getVelY() {
 		return velY;
 	}
 
@@ -75,12 +81,12 @@ public class Sprite {
 		this.image = image;
 	}
 
-	public void setPosition(double x,double y){
+	void setPosition(double x,double y){
 		this.posX = x;
 		this.posY = y;
 	}
 
-	public void setVelocity(double x,double y){
+	void setVelocity(double x,double y){
 		this.velX = x;
 		this.velY = y;
 	}
